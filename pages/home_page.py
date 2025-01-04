@@ -1,73 +1,42 @@
 from pages.base_page import BasePage
 from locators import Locators
+import allure
 
 
+@allure.story("Методы, покрывающие главную страницу")
 class HomePage(BasePage):
-    def scroll_to_element(self, driver):
-        element = driver.find_element(*Locators.QUESTION_0)
-        driver.execute_script("arguments[0].scrollIntoView();", element)
+    @allure.step("Клик по вопросу")
+    def click_question(self, question_locator):
+        self.find_element_for_click(locator=question_locator).click()
 
-    def click_place_0(self):
-        self.find_element_for_click(locator=Locators.QUESTION_0).click()
+    @allure.step("Получение текста ответа")
+    def get_answer_text(self, answer_locator):
+        return self.find_element_for_visio(locator=answer_locator).text
 
-    def check_answer_0(self):
-        self.find_element_for_visio(locator=Locators.ANSWER_0)
+    @allure.step("Метод прокрутки страницы до нужного элемента на странице")
+    def scroll_to_element(self, locator):
+        return self.scroll_to_element_base(locator)
 
-    def click_place_1(self):
-        self.find_element_for_click(locator=Locators.QUESTION_1).click()
+    @allure.step("Клик по кнопке заказа сверху")
+    def click_button_order_up(self):
+        self.find_element_for_click(locator=Locators.BUTTON_ORDER_UP).click()
 
-    def check_answer_1(self):
-        self.find_element_for_visio(locator=Locators.ANSWER_1)
+    @allure.step("Клик по кнопке заказа снизу")
+    def click_button_order_down(self):
+        self.find_element_for_click(locator=Locators.BUTTON_ORDER_DOWN).click()
 
-    def click_place_2(self):
-        self.find_element_for_click(locator=Locators.QUESTION_2).click()
-
-    def check_answer_2(self):
-        self.find_element_for_visio(locator=Locators.ANSWER_2)
-
-    def click_place_3(self):
-        self.find_element_for_click(locator=Locators.QUESTION_3).click()
-
-    def check_answer_3(self):
-        self.find_element_for_visio(locator=Locators.ANSWER_3)
-
-    def click_place_4(self):
-        self.find_element_for_click(locator=Locators.QUESTION_4).click()
-
-    def check_answer_4(self):
-        self.find_element_for_visio(locator=Locators.ANSWER_4)
-
-    def click_place_5(self):
-        self.find_element_for_click(locator=Locators.QUESTION_5).click()
-
-    def check_answer_5(self):
-        self.find_element_for_visio(locator=Locators.ANSWER_5)
-
-    def click_place_6(self):
-        self.find_element_for_click(locator=Locators.QUESTION_6).click()
-
-    def check_answer_6(self):
-        self.find_element_for_visio(locator=Locators.ANSWER_6)
-
-    #метод клика по кнопке заказа сверху на главной
-    def click_button_order(self, locator):
-        self.find_element_for_visio(locator=Locators.BUTTON_ORDER_UP).click()
-
+    @allure.step("Клик по кнопке согласия на сбор куки")
     def click_button_cookie(self):
         self.find_element_for_click(locator=Locators.BUTTON_COOKIE).click()
 
+    @allure.step("Клик по голотип-слову'cамокат'")
     def click_logo_scooter(self):
         self.find_element_for_click(locator=Locators.LOGO_WORD_SCOOTER).click()
 
+    @allure.step("Клик по голотип-слову'яндекс'")
     def click_logo_ya(self):
         self.find_element_for_click(locator=Locators.LOGO_WORD_YANDEX).click()
 
-
-
-
-
-
-
-
-
-
+    @allure.step("Проверка успешного оформления заказа")
+    def is_order_successful(self):
+        return 'Заказ оформлен' in self.find_element_for_visio(Locators.SIGNAL_ORDER_IS_READY).text
