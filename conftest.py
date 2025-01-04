@@ -1,6 +1,7 @@
 import pytest
 from selenium import webdriver
 from pages.home_page import HomePage
+from locators import Locators
 
 @pytest.fixture(scope="function")
 def driver():
@@ -9,8 +10,16 @@ def driver():
     driver.quit()
 
 @pytest.fixture(scope="function")
-def home_page(driver):
+def home_page_start(driver):
     page = HomePage(driver)
     page.go_to_site(driver)
-    page.scroll_to_element(driver)
+    page.click_button_cookie()
+    page.scroll_to_element(Locators.QUESTION_0)
+    return page
+
+@pytest.fixture(scope="function")
+def home_page_order(driver):
+    page = HomePage(driver)
+    page.go_to_site(driver)
+    page.click_button_cookie()
     return page
