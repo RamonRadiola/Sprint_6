@@ -3,10 +3,8 @@ from locators import Locators
 import allure
 
 
-@allure.story("Методы, покрывающие страницу заказа")
+
 class OrderPage(BasePage):
-
-
     @allure.step("Проверка появления надписи 'Для кого самокат'")
     def check_visio_test(self):
         self.find_element_for_visio(locator=Locators.SIGNAL_ORDER_1)
@@ -93,8 +91,8 @@ class OrderPage(BasePage):
 
     @allure.step("Метод прокрутки страницы до кнопки 'заказать'")
     def scroll_to_order_button(self):
-        return self.scroll_to_element(locator=Locators.BUTTON_ORDER_DOWN)
+        return self.scroll_to_element_base(locator=Locators.BUTTON_ORDER_DOWN)
 
     @allure.step("поиск сообщения о готовности заказа")
-    def order_is_ready(self):
-        self.find_element_for_visio(locator=Locators.SIGNAL_ORDER_IS_READY)
+    def check_current_status(self):
+        assert 'Заказ оформлен' in self.find_element_for_visio(Locators.SIGNAL_ORDER_IS_READY).text
