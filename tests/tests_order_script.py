@@ -1,13 +1,12 @@
 from pages.home_page import HomePage
 from pages.order_page import OrderPage
-from locators import Locators
 from constants import Constants
 from data import Data
 import allure
 
-@allure.story("Тестируем позитивный сценарий заказа")
+@allure.story("Кликает на плашку вопроса, проверяет текст выпадающего ответа")
 class TestOrderPage:
-    @allure.step("Первый сценарий через кнопку сверху")
+    @allure.title("Первый сценарий через кнопку сверху")
     def test_positive_order_first(self, home_page_order):
         order_page = OrderPage(home_page_order.driver)
         home_page_order.click_button_order_up()
@@ -25,9 +24,9 @@ class TestOrderPage:
         order_page.click_button_order_down_2()
         order_page.click_button_yes()
         order_page.check_button_status()
-        assert 'Заказ оформлен' in order_page.find_element_for_visio(Locators.SIGNAL_ORDER_IS_READY).text
+        order_page.check_current_status()
 
-    @allure.step("Второй сценарий через кнопку снизу")
+    @allure.title("Второй сценарий через кнопку снизу")
     def test_positive_order_second(self, home_page_order):
         order_page = OrderPage(home_page_order.driver)
         home_page_order.click_button_order_down()
@@ -45,9 +44,9 @@ class TestOrderPage:
         order_page.click_button_order_down_2()
         order_page.click_button_yes()
         order_page.check_button_status()
-        assert 'Заказ оформлен' in order_page.find_element_for_visio(Locators.SIGNAL_ORDER_IS_READY).text
+        order_page.check_current_status()
 
-    @allure.step("Переход по логотипу 'самокат'")
+    @allure.title("Переход по логотипу 'самокат'")
     def test_click_scooter(self, driver):
         home_page = HomePage(driver)
         home_page.go_to_site(driver)
@@ -55,7 +54,7 @@ class TestOrderPage:
         home_page.click_logo_scooter()
         assert home_page.check_current_url() == Constants.URL
 
-    @allure.step("Переход по логотипу 'Яндекс'")
+    @allure.title("Переход по логотипу 'Яндекс'")
     def test_click_ya(self, driver):
         home_page = HomePage(driver)
         home_page.go_to_site(driver)
