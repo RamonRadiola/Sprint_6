@@ -10,16 +10,13 @@ def driver():
     driver.quit()
 
 @pytest.fixture(scope="function")
-def home_page_start(driver):
-    page = HomePage(driver)
-    page.go_to_site(driver)
-    page.click_button_cookie()
-    page.scroll_to_element(Locators.QUESTION_0)
-    return page
-
-@pytest.fixture(scope="function")
 def home_page_order(driver):
     page = HomePage(driver)
     page.go_to_site(driver)
     page.click_button_cookie()
     return page
+
+@pytest.fixture(scope="function")
+def home_page_start(home_page_order):
+    home_page_order.scroll_to_element(Locators.QUESTION_0)
+    return home_page_order
