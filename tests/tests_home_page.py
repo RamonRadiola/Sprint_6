@@ -3,9 +3,9 @@ import pytest
 from pages.home_page import HomePage
 from data import Data
 
-@allure.story("Тестирует выпадающий список раздела с вопросами и ответами")
+@allure.story("Кликает на плашку вопроса, проверяет текст выпадающего ответа")
 class TestHomePage:
-    @allure.story("Кликает на плашку вопроса, проверяет текст выпадающего ответа")
+    @allure.title("Кликает на плашку вопроса, проверяет текст выпадающего ответа")
     @pytest.mark.parametrize("question_data", Data.QUESTION_DATA)
     def test_question_and_answer(self, home_page_start, question_data):
         home_page = HomePage(home_page_start.driver)
