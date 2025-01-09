@@ -4,7 +4,7 @@ from constants import Constants
 from locators import Locators
 import allure
 
-@allure.story("общие базовые методы для методов отдельных страниц сайта")
+
 class BasePage:
     def __init__(self, driver):
         self.driver = driver
