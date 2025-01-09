@@ -3,7 +3,7 @@ from locators import Locators
 import allure
 
 
-@allure.story("Методы, покрывающие главную страницу")
+
 class HomePage(BasePage):
     @allure.step("Клик по вопросу")
     def click_question(self, question_locator):
